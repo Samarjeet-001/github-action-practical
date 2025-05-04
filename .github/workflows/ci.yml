@@ -1,0 +1,26 @@
+name: CI Workflow
+
+on: push
+
+jobs:
+  build-and-test:
+    runs-on: ubantu-latest
+    steps:
+      - name: Chectout code
+	uses: actions/chectout@v2
+
+      - name: Set up Node.js
+	uses: actions/setup-node@v2
+
+      - name: Install dependencies
+	run: npm install
+
+      - name: Run tests
+	run: npm test
+
+  deploy:
+    runs-on: ubantu-latest
+    needs: build-and-test
+    steps:
+      - name: Deploy application
+	run: echo 'Deploying application...'
